@@ -117,7 +117,7 @@ public class ApptTest {
     }
     @Test
     public void test10() throws Throwable {
-        Appt appt = new Appt(13, 2, 32, 04, 2017, "Test Day", "35 days not possible");
+        Appt appt = new Appt(13, 2, 32, 04, 2017, "Test Day", "32 days not possible");
         assertFalse(appt.getValid());
     }
     @Test
@@ -130,5 +130,48 @@ public class ApptTest {
         Appt appt = new Appt(13, 2, 10, 13, 2017, "Test Month", "13 months not possible");
         assertFalse(appt.getValid());
     }
+    @Test
+    public void test13() throws Throwable {
+        Appt appt = new Appt(13,2,10,04,2017, "Test String", "Testing String");
+        assertEquals("\t04/10/2017 at 1:02pm ,Test String, Testing String.\n", appt.toString());
+    }
     
+    @Test
+    public void test14() throws Throwable {
+        Appt appt = new Appt(13,2,10,04,2017, "Test Set", "Testing set");
+        appt.setStartHour(14);
+        appt.setStartMinute(3);
+        appt.setStartDay(11);
+        appt.setStartMonth(05);
+        appt.setStartYear(2016);
+        appt.setTitle("gjdks");
+        appt.setDescription("jgsdkjfbs");
+        assertTrue(appt.getValid());
+        assertEquals(14, appt.getStartHour());
+        assertEquals(3, appt.getStartMinute());
+        assertEquals(11, appt.getStartDay());
+        assertEquals(05, appt.getStartMonth());
+        assertEquals(2016, appt.getStartYear());
+        assertEquals("gjdks", appt.getTitle());
+        assertEquals("jgsdkjfbs", appt.getDescription());
+    }
+    @Test
+    public void test15() throws Throwable {
+        Appt appt = new Appt(13,2,10,04,2017, "Test Set", "Testing set");
+        appt.setStartHour(0);
+        appt.setStartMinute(0);
+        appt.setStartDay(0);
+        appt.setStartMonth(0);
+        appt.setStartYear(0);
+        appt.setTitle(null);
+        appt.setDescription(null);
+        assertTrue(appt.getValid());
+        assertEquals(0, appt.getStartHour());
+        assertEquals(0, appt.getStartMinute());
+        assertEquals(0, appt.getStartDay());
+        assertEquals(0, appt.getStartMonth());
+        assertEquals(0, appt.getStartYear());
+        assertEquals(null, appt.getTitle());
+        assertEquals(null, appt.getDescription());
+    }
 }
